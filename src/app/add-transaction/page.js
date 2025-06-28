@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function AddTransaction() {
     const router = useRouter();
@@ -16,6 +20,10 @@ export default function AddTransaction() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    const handleSelect = (value) => {
+        setForm({ ...form, type: value});
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         alert('Transaksi berhasil ditambahkan');
@@ -24,16 +32,36 @@ export default function AddTransaction() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-4">Menambah Transalsi</h1>
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md:">
-                <input type="text" name="title" placeholder="title" value={form.title} onChange={handleChange} required className=" w-full border p-2 rounded"/>
-                <input type="number" name="amount" placeholder="Amount" value={form.amount} onChange={handleChange} required className="w-full border p-2 rounded"/>
-                <select name="type" value={form.type} onChange={handleChange} className="w-full border p-2 rounded">
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select>
-                <input type="date" name="date" value={form.date} onChange={handleChange} required className="w-full border p-2 rounded"/>
-                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah</button>
+            <h1 className="text-2xl font-bold mb-4">Menambah Transaksi</h1>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                    <Label>Judul</Label>    
+                    <Input type="text" name="title" placeholder="title" value={form.title} onChange={handleChange} required/>
+                </div>
+
+                <div>
+                    <Label>Jumlah</Label>
+                    <Input type="number" name="amount" placeholder="Amount" value={form.amount} onChange={handleChange} required/>
+                </div>
+
+                <div>
+                    <Label>Tipe pengeluaran</Label>
+                    <Select value={form.type} onValueChange={handleSelect}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Pilih tipe"></SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="income">Pemasukan</SelectItem>
+                            <SelectItem value="expense">Pengeluaran</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                <div>
+                    <Label>Tanggal</Label>
+                    <Input type="date" name="date" value={form.date} onChange={handleChange} required/>
+                </div>
+                <Button type="submit">Tambah transaksi</Button>
             </form>
         </div>
     );

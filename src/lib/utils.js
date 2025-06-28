@@ -11,3 +11,9 @@ export function formatRupiah(number) {
     currency: 'IDR',
   }).format(number);
 }
+
+export async function getTransactions() {
+  const res = await fetch('/data.json');
+  const data = await res.json();
+  return data;
+}

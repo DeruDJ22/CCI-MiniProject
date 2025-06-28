@@ -4,13 +4,104 @@
     "title": "Gaji Bulanan",
     "amount": 5000000,
     "type": "income",
-    "date": "2025-06-28"
+    "date": "2025-06-01"
   },
   {
     "id": 2,
-    "title": "Beli Makan",
+    "title": "Beli Makan Siang",
     "amount": 50000,
     "type": "expense",
-    "date": "2025-06-28"
+    "date": "2025-06-02"
+  },
+  {
+    "id": 3,
+    "title": "Bayar Listrik",
+    "amount": 250000,
+    "type": "expense",
+    "date": "2025-06-03"
+  },
+  {
+    "id": 4,
+    "title": "Bayar Internet",
+    "amount": 300000,
+    "type": "expense",
+    "date": "2025-06-04"
+  },
+  {
+    "id": 5,
+    "title": "Freelance Design",
+    "amount": 1500000,
+    "type": "income",
+    "date": "2025-06-05"
+  },
+  {
+    "id": 6,
+    "title": "Ngopi di Starbucks",
+    "amount": 65000,
+    "type": "expense",
+    "date": "2025-06-06"
+  },
+  {
+    "id": 7,
+    "title": "Beli Groceries",
+    "amount": 450000,
+    "type": "expense",
+    "date": "2025-06-07"
+  },
+  {
+    "id": 8,
+    "title": "Transfer dari Teman",
+    "amount": 200000,
+    "type": "income",
+    "date": "2025-06-08"
+  },
+  {
+    "id": 9,
+    "title": "Beli Buku",
+    "amount": 120000,
+    "type": "expense",
+    "date": "2025-06-09"
+  },
+  {
+    "id": 10,
+    "title": "Bonus Project",
+    "amount": 1000000,
+    "type": "income",
+    "date": "2025-06-10"
+  },
+  {
+    "id": 11,
+    "title": "Bayar Netflix",
+    "amount": 60000,
+    "type": "expense",
+    "date": "2025-06-11"
+  },
+  {
+    "id": 12,
+    "title": "Bayar Spotify",
+    "amount": 49000,
+    "type": "expense",
+    "date": "2025-06-12"
+  },
+  {
+    "id": 13,
+    "title": "Bayar BPJS",
+    "amount": 150000,
+    "type": "expense",
+    "date": "2025-06-13"
+  },
+  {
+    "id": 14,
+    "title": "Freelance Coding",
+    "amount": 2000000,
+    "type": "income",
+    "date": "2025-06-14"
+  },
+  {
+    "id": 15,
+    "title": "Beli Jajan",
+    "amount": 30000,
+    "type": "expense",
+    "date": "2025-06-15"
   }
 ]
