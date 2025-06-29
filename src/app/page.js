@@ -1,23 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getTransactions, calculateSummary, formatRupiah } from "@/lib/utils";
+import useTransaction from "@/lib/useTransaction";
+import { formatRupiah } from "@/lib/utils";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [summary, setSummary] = useState({
-    totalIncome: 0,
-    totalExpense: 0,
-    totalTransaction: 0,
-  });
+  const { transactions } = useTransaction();
 
-  useEffect(() => {
-    getTransactions().then((data) => {
-      const result = calculateSummary(data);
-      setSummary(result);
-    });
-  }, []);
+  const totalIncome = transactions
+    .filter((tx) => tx.type === "income")
+    .reduce((acc, curr) => acc + curr.amount, 0);
+
+  const totalExpense = transactions
+    .filter((tx) => tx.type === "expense")
+    .reduce((acc, curr) => acc + curr.amount, 0);
+
+  const totalTransaction = transactions.length;
 
   return (
     <div className="space-y-6">
@@ -46,7 +45,7 @@ export default function Home() {
             <CardTitle>Total Transaksi</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{summary.totalTransaction}</p>
+            <p className="text-2xl font-bold">{totalTransaction}</p>
           </CardContent>
         </Card>
         <Card>
@@ -55,7 +54,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-green-600">
-              {formatRupiah(summary.totalIncome)}
+              {formatRupiah(totalIncome)}
             </p>
           </CardContent>
         </Card>
@@ -65,7 +64,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-red-600">
-              {formatRupiah(summary.totalExpense)}
+              {formatRupiah(totalExpense)}
             </p>
           </CardContent>
         </Card>
