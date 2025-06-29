@@ -1,7 +1,24 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { getTransactions, calculateSummary, formatRupiah } from "@/lib/utils";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const [summary, setSummary] = useState({
+    totalIncome: 0,
+    totalExpense: 0,
+    totalTransaction: 0,
+  });
+
+  useEffect(() => {
+    getTransactions().then((data) => {
+      const result = calculateSummary(data);
+      setSummary(result);
+    });
+  }, []);
+
   return (
     <div className="space-y-6">
       <Card>
@@ -29,7 +46,7 @@ export default function Home() {
             <CardTitle>Total Transaksi</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">12</p>
+            <p className="text-2xl font-bold">{summary.totalTransaction}</p>
           </CardContent>
         </Card>
         <Card>
@@ -37,7 +54,9 @@ export default function Home() {
             <CardTitle>Total Pemasukan</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold text-green-600">Rp 7.000.000</p>
+            <p className="text-2xl font-bold text-green-600">
+              {formatRupiah(summary.totalIncome)}
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -45,7 +64,9 @@ export default function Home() {
             <CardTitle>Total Pengeluaran</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold text-red-600">Rp 2.500.000</p>
+            <p className="text-2xl font-bold text-red-600">
+              {formatRupiah(summary.totalExpense)}
+            </p>
           </CardContent>
         </Card>
       </div>

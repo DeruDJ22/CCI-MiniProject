@@ -17,3 +17,17 @@ export async function getTransactions() {
   const data = await res.json();
   return data;
 }
+
+export function calculateSummary(transactions) {
+  const totalIncome = transactions
+    .filter((tx) => tx.type === 'income')
+    .reduce((acc, curr) => acc + curr.amount, 0);
+
+  const totalExpense = transactions
+    .filter((tx) => tx.type === 'expense')
+    .reduce((acc, curr) => acc + curr.amount, 0);
+
+  const totalTransaction = transactions.length;
+
+  return { totalIncome, totalExpense, totalTransaction };
+}

@@ -19,7 +19,6 @@ export default function About() {
           <ul className="list-disc pl-5 space-y-1 text-gray-600">
             <li>Mencatat pemasukan dan pengeluaran dengan mudah</li>
             <li>Melihat riwayat transaksi</li>
-            <li>Statistik dan ringkasan keuangan (segera)</li>
             <li>Antarmuka yang simpel dan responsive</li>
           </ul>
         </div>
