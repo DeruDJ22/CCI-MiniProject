@@ -11,46 +11,51 @@ export default function Home() {
           "url(https://images.unsplash.com/photo-1524492412937-4961f1b8d04e?auto=format&fit=crop&w=1600&q=80)",
       }}
     >
-      <div className="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-8 max-w-4xl w-full">
+      <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl p-10 w-full max-w-5xl">
         <Card className="border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-4xl text-center font-bold">
-              Welcome to MultiApp
+            <CardTitle className="text-5xl text-center font-extrabold">
+              Welcome to <span className="text-blue-600">MultiApp</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-8">
-            <p className="text-center text-gray-700 text-lg">
-              Pilih aplikasi yang ingin kamu buka:
+            <p className="text-center text-gray-700 text-xl">
+              Pilih aplikasi yang ingin kamu buka
             </p>
             <div className="flex flex-col md:flex-row gap-6 justify-center">
+              {/* Finance App */}
               <Button
                 asChild
                 variant="outline"
-                className="w-full md:w-1/2 h-36 flex flex-col items-center justify-center gap-3 text-lg"
+                className="w-72 h-40 flex flex-col items-center justify-center gap-3 text-xl border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 <a href="/finance-tracker">
                   <Image
                     src="/logo-finance.avif"
                     alt="Finance"
-                    width={60}
-                    height={60}
+                    width={70}
+                    height={70}
+                    className="rounded-lg"
                   />
-                  💰 Finance Tracker
+                  <span className="text-lg font-semibold">💰 Finance Tracker</span>
                 </a>
               </Button>
+
+              {/* Anime App */}
               <Button
                 asChild
                 variant="outline"
-                className="w-full md:w-1/2 h-36 flex flex-col items-center justify-center gap-3 text-lg"
+                className="w-72 h-40 flex flex-col items-center justify-center gap-3 text-xl border-2 border-pink-600 hover:bg-pink-600 hover:text-white transition-all duration-300"
               >
                 <a href="/anime">
                   <Image
                     src="/logo-anime.jpg"
                     alt="Anime"
-                    width={60}
-                    height={60}
+                    width={70}
+                    height={70}
+                    className="rounded-lg"
                   />
-                  🎥 Anime Watchlist
+                  <span className="text-lg font-semibold">🎥 Anime Watchlist</span>
                 </a>
               </Button>
             </div>

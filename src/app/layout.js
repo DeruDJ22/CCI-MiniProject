@@ -12,16 +12,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "HomeAPPP",
-  description: "Web Multi",
+  title: "MultiApp",
+  description: "Aplikasi gabungan Finance Tracker dan Anime Watchlist",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-50">
-        <main className="p-4 max-w-4xl mx-auto">{children}</main>
-      </body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="min-h-screen bg-gray-50">{children}</body>
     </html>
   );
 }

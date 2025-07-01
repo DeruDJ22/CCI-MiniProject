@@ -9,8 +9,6 @@ const links = [
   { href: "/anime", label: "Home" },
   { href: "/anime/list", label: "Daftar List" },
   { href: "/anime/add", label: "Tambah List" },
-  { href: "/finance-tracker/statistics", label: "Statistics" },
-  { href: "/finance-tracker/about", label: "About" },
 ];
 
 export default function Navbar() {
