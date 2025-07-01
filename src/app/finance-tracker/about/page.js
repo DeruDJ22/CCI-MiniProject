@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "../components/ui/separator";
 
 export default function About() {
   return (
@@ -22,12 +22,6 @@ export default function About() {
             <li>Antarmuka yang simpel dan responsive</li>
           </ul>
         </div>
-
-        <Separator />
-
-        <p className="text-sm text-gray-500">
-          Dibuat dengan Next.js, TailwindCSS, dan Shadcn UI. 🚀
-        </p>
       </CardContent>
     </Card>
   );

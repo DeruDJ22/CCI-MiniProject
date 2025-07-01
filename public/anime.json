@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "One Piece",
+    "status": "watching",
+    "episodes": 1000,
+    "currentEpisode": 100,
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 2,
+    "title": "Attack on Titan",
+    "status": "completed",
+    "episodes": 87,
+    "currentEpisode": 87,
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 3,
+    "title": "Demon Slayer",
+    "status": "watching",
+    "episodes": 55,
+    "currentEpisode": 20,
+    "dateAdded": "2025-06-28"
+  }
+]
