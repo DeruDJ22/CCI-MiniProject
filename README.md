@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌐 Koleksi Project Next.js by KuroAkai
 
-## Getting Started
+Ini adalah dua aplikasi web yang dibangun dengan Next.js dan TailwindCSS, masing-masing dengan fokus berbeda: eksplorasi anime dan pengelolaan keuangan pribadi.
 
-First, run the development server:
+---
+
+## 🎌 Anime Explorer
+
+Sebuah aplikasi eksplorasi anime yang memanfaatkan data dari [Jikan API](https://jikan.moe/) untuk menampilkan informasi anime secara lengkap dan menarik.
+
+### 🚀 Fitur Utama
+
+- 🔍 Cari anime berdasarkan judul
+- 🏆 Lihat daftar top anime
+- 🌸 Eksplorasi anime berdasarkan musim (season)
+- 📽️ Lihat trailer dan detail lengkap anime
+- 🎲 Tampilkan anime acak
+- 📱 Responsive design (mobile-friendly)
+
+### 🛠️ Teknologi
+
+- **Next.js App Router**
+- **TailwindCSS**
+- **Jikan API v4**
+- **Shadcn/ui** (untuk komponen UI)
+- **Next.js Image Optimization**
+
+### 📂 Struktur Halaman
+
+- `/` – Beranda
+- `/anime/list` – Daftar seluruh anime
+- `/anime/add` – Cari anime
+- `/anime/:id` – Detail anime
+- `/about` – Tentang aplikasi
+
+---
+
+## 💰 Finance Tracker
+
+Aplikasi sederhana untuk mencatat pemasukan dan pengeluaran harian dengan tampilan yang interaktif dan mendukung fitur CRUD lengkap.
+
+### ✅ Fitur Utama
+
+- ➕ Tambah transaksi (pemasukan/pengeluaran)
+- ✏️ Edit nominal transaksi
+- 🗑️ Hapus transaksi
+- 📊 Statistik visual (pie chart)
+- 🔍 Filter transaksi berdasarkan tipe
+- 🔔 Notifikasi real-time (dengan Sonner)
+- 📱 Responsive & mobile-friendly
+
+### 🛠️ Teknologi
+
+- **Next.js App Router**
+- **TailwindCSS**
+- **Shadcn/ui**
+- **Recharts** untuk visualisasi data
+- **Sonner** untuk toast notifikasi
+- **LocalStorage** sebagai data penyimpanan
+
+### 📂 Struktur Halaman
+
+- `/finance-tracker` – Beranda
+- `/finance-tracker/transactions` – Daftar transaksi
+- `/finance-tracker/add-transaction` – Tambah transaksi
+- `/finance-tracker/statistics` – Statistik
+- `/finance-tracker/about` – Tentang aplikasi
+
+---
+
+## 📦 Instalasi & Menjalankan Secara Lokal
+
+Clone repository dan jalankan proyek secara lokal:
 
 ```bash
+git clone https://github.com/DeruDJ22/CCI-MiniProject.git
+cd project-nextjs
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
