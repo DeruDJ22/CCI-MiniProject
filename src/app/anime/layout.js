@@ -17,13 +17,12 @@ export const metadata = {
   description: "Aplikasi untuk mencatat wishlist anime yang ingin ditonton."
 };
 
-export default function RootLayout({ children }) {
+export default function LayoutWrapper({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-gray-50">
-        <Navbar />
-        <main className="p-4 max-w-4xl mx-auto">{children}</main>
-      </body>
-    </html>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main className="p-4 max-w-4xl mx-auto">{children}</main>
+    </div>
   );
 }
+
