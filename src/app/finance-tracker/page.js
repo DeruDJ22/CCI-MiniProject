@@ -19,20 +19,26 @@ export default function Home() {
   const totalTransaction = transactions.length;
 
   return (
-    <div className="space-y-6">
-      <Card>
+    <div className="pt-20 space-y-4">
+      <Card className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg rounded-xl">
         <CardHeader>
-          <CardTitle className="text-3xl">Finance Tracker</CardTitle>
+          <CardTitle className="text-3xl">
+            Selamat Datang di Finance Tracker
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-gray-600">
-            Aplikasi untuk mencatat pemasukan dan pengeluaran Anda sehari-hari.
+          <p className="text-lg">
+            Kelola keuangan Anda dengan mudah dan efisien.
           </p>
-          <div className="flex gap-4">
-            <Button asChild>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button asChild variant="secondary">
               <a href="/finance-tracker/transactions">Lihat Transaksi</a>
             </Button>
-            <Button variant="outline" asChild>
+            <Button
+              asChild
+              variant="outline"
+              className="text-blue-600 border-white bg-white"
+            >
               <a href="/finance-tracker/add-transaction">Tambah Transaksi</a>
             </Button>
           </div>

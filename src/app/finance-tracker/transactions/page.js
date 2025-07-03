@@ -1,10 +1,9 @@
 "use client";
 
-import useTransaction from "@/lib/useTransaction";
+import { useEffect, useState } from "react";
 import { formatRupiah } from "@/lib/utils";
-import { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -15,11 +14,45 @@ import {
   AlertDialogDescription,
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function Transaction() {
-  const { transactions, deleteTransaction, updateTransaction } = useTransaction();
+  const [transactions, setTransactions] = useState([]);
   const [editId, setEditId] = useState(null);
   const [editAmount, setEditAmount] = useState("");
+  const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("transactions")) || [];
+    setTransactions(saved);
+  }, []);
+
+  const saveToLocal = (data) => {
+    localStorage.setItem("transactions", JSON.stringify(data));
+  };
+
+  const deleteTransaction = (id) => {
+    const updated = transactions.filter((tx) => tx.id !== id);
+    setTransactions(updated);
+    saveToLocal(updated);
+    toast.success("Transaksi berhasil dihapus");
+  };
+
+  const updateTransaction = (id, data) => {
+    const updated = transactions.map((tx) =>
+      tx.id === id ? { ...tx, ...data } : tx
+    );
+    setTransactions(updated);
+    saveToLocal(updated);
+    toast.success("Transaksi berhasil diperbarui");
+  };
 
   const handleEdit = (id, amount) => {
     setEditId(id);
@@ -32,14 +65,32 @@ export default function Transaction() {
     setEditAmount("");
   };
 
+  const filteredTransactions =
+    filter === "all"
+      ? transactions
+      : transactions.filter((tx) => tx.type === filter);
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Transaksi</h1>
-      {transactions.length === 0 ? (
+    <div className="pt-20 space-y-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <h1 className="text-2xl font-bold">Transaksi</h1>
+        <Select value={filter} onValueChange={setFilter}>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Filter" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Semua</SelectItem>
+            <SelectItem value="income">Pemasukan</SelectItem>
+            <SelectItem value="expense">Pengeluaran</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {filteredTransactions.length === 0 ? (
         <p className="text-gray-500">Belum ada transaksi</p>
       ) : (
         <ul className="space-y-4">
-          {transactions.map((tx) => (
+          {filteredTransactions.map((tx) => (
             <Card key={tx.id}>
               <CardHeader>
                 <CardTitle>{tx.title}</CardTitle>
@@ -65,7 +116,10 @@ export default function Transaction() {
                         className="w-24"
                       />
                       <Button onClick={() => saveEdit(tx.id)}>Simpan</Button>
-                      <Button variant="secondary" onClick={() => setEditId(null)}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setEditId(null)}
+                      >
                         Batal
                       </Button>
                     </>
@@ -85,7 +139,9 @@ export default function Transaction() {
                           </AlertDialogDescription>
                           <div className="flex justify-end gap-2">
                             <AlertDialogCancel>Batal</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => deleteTransaction(tx.id)}>
+                            <AlertDialogAction
+                              onClick={() => deleteTransaction(tx.id)}
+                            >
                               Hapus
                             </AlertDialogAction>
                           </div>
@@ -102,4 +158,3 @@ export default function Transaction() {
     </div>
   );
 }
-  

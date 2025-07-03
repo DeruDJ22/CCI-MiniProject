@@ -2,12 +2,7 @@
 
 import useTransaction from "@/lib/useTransaction";
 import { formatRupiah } from "@/lib/utils";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const COLORS = ["#16a34a", "#dc2626"];
@@ -29,7 +24,7 @@ export default function Statistics() {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="pt-20 space-y-4">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Statistics</CardTitle>
@@ -48,7 +43,10 @@ export default function Statistics() {
                   label
                 >
                   {data.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip formatter={(value) => formatRupiah(value)} />
