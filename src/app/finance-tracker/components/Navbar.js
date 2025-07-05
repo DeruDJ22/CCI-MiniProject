@@ -46,7 +46,6 @@ export default function Navbar() {
       )}
     >
       <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
-        {/* Logo + Toggle */}
         <div className="flex items-center gap-4">
           <Link href="/finance-tracker" className="font-bold text-xl">
             Finance Tracker
@@ -59,7 +58,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Desktop nav */}
         <ul className="hidden sm:flex gap-6">
           {links.map((link) => (
             <li key={link.href}>
@@ -85,7 +83,6 @@ export default function Navbar() {
         </Button>
       </div>
 
-      {/* Mobile dropdown */}
       {isOpen && (
         <div className="sm:hidden px-4 pb-4">
           <ul className="flex flex-col gap-2">

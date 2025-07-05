@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function Transaction() {
   const [transactions, setTransactions] = useState([]);
@@ -155,6 +156,12 @@ export default function Transaction() {
           ))}
         </ul>
       )}
+      <Link
+        href="/finance-tracker/add-transaction"
+        className="fixed bottom-6 right-6 sm:hidden"
+      >
+        <Button className="rounded-full w-14 h-14 text-xl shadow-lg">+</Button>
+      </Link>
     </div>
   );
 }
