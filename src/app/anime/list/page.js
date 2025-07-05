@@ -35,13 +35,15 @@ export default function AnimeList() {
   };
 
   useEffect(() => {
-    const url = `https://api.jikan.moe/v4/top/anime?limit=21&page=${page}${
-      filter !== "all" ? `&type=${filter}` : ""
-    }`;
+    const fetchAnimeList = async () => {
+      const url = `https://api.jikan.moe/v4/top/anime?limit=21&page=${page}${
+        filter !== "all" ? `&type=${filter}` : ""
+      }`;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
         if (!data.data) {
           setAnimeList([]);
           setHasNextPage(false);
@@ -57,11 +59,13 @@ export default function AnimeList() {
 
         setAnimeList(uniqueAnime);
         setHasNextPage(data.pagination?.has_next_page);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Fetch error:", err);
         setAnimeList([]);
-      });
+      }
+    };
+
+    fetchAnimeList();
   }, [page, filter]);
 
   return (

@@ -12,22 +12,35 @@ export default function SearchAnime() {
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    if (!query) return;
-    setLoading(true);
-    fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=20`)
-      .then((res) => res.json())
-      .then((data) => {
-        setAnimeList(data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetch:", err);
-        setAnimeList([]);
-      })
-      .finally(() => {
-        setLoading(false);
+  const handleSearch = async () => {
+  if (!query) return;
+
+  setLoading(true);
+
+  try {
+    const res = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=20`);
+    const data = await res.json();
+
+    if (data?.data) {
+      const seen = new Set();
+      const uniqueResults = data.data.filter((anime) => {
+        if (seen.has(anime.mal_id)) return false;
+        seen.add(anime.mal_id);
+        return true;
       });
-  };
+
+      setAnimeList(uniqueResults);
+    } else {
+      setAnimeList([]);
+    }
+  } catch (err) {
+    console.error("Error fetch:", err);
+    setAnimeList([]);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="pt-20 space-y-6">
