@@ -1,4 +1,4 @@
-# 🌐 Koleksi Project Next.js by KuroAkai
+# 🌐 Mini Project Next.js by KuroAkai
 
 Ini adalah dua aplikasi web yang dibangun dengan Next.js dan TailwindCSS, masing-masing dengan fokus berbeda: eksplorasi anime dan pengelolaan keuangan pribadi.
 
