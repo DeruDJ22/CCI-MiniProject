@@ -23,13 +23,12 @@ Sebuah aplikasi eksplorasi anime yang memanfaatkan data dari [Jikan API](https:/
 - **TailwindCSS**
 - **Jikan API v4**
 - **Shadcn/ui** (untuk komponen UI)
-- **Next.js Image Optimization**
 
 ### 📂 Struktur Halaman
 
 - `/` – Beranda
 - `/anime/list` – Daftar seluruh anime
-- `/anime/add` – Cari anime
+- `/anime/search` – Cari anime
 - `/anime/:id` – Detail anime
 - `/about` – Tentang aplikasi
 
