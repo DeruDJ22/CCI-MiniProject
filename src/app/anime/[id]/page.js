@@ -18,7 +18,7 @@ export default function DetailAnime() {
     const fetchAll = async () => {
       try {
         const [animeRes, charRes, staffRes] = await Promise.all([
-          fetch(`https://api.jikan.moe/v4/anime/${id}`),
+          fetch(`https://api.jikan.moe/v4/anime/${id}/full`),
           fetch(`https://api.jikan.moe/v4/anime/${id}/characters`),
           fetch(`https://api.jikan.moe/v4/anime/${id}/staff`),
         ]);
@@ -52,12 +52,17 @@ export default function DetailAnime() {
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-3xl">{anime.title}</CardTitle>
+          <p className="text-sm text-muted-foreground italic">
+            {anime.title_english || "-"} ・ {anime.title_japanese || "-"}
+          </p>
         </CardHeader>
 
         <CardContent className="flex flex-col lg:flex-row gap-6">
           <div className="w-full lg:w-[300px] flex-shrink-0">
             <Image
-              src={anime.images.webp.image_url}
+              src={
+                anime.images?.webp?.image_url || anime.images?.jpg?.image_url
+              }
               alt={anime.title}
               width={300}
               height={450}
@@ -67,21 +72,105 @@ export default function DetailAnime() {
 
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <p><b>Type:</b> {anime.type}</p>
-              <p><b>Status:</b> {anime.status}</p>
-              <p><b>Episodes:</b> {anime.episodes}</p>
-              <p><b>Score:</b> {anime.score ?? "N/A"}</p>
-              <p><b>Year:</b> {anime.year ?? "?"}</p>
-              <p><b>Genres:</b> {anime.genres.map((g) => g.name).join(", ") || "-"}</p>
-              <p><b>Studios:</b> {anime.studios.map((s) => s.name).join(", ") || "-"}</p>
-              <p><b>Producers:</b> {anime.producers.map((p) => p.name).join(", ") || "-"}</p>
-              <p><b>Licensors:</b> {anime.licensors.map((l) => l.name).join(", ") || "-"}</p>
+              <p>
+                <b>Type:</b> {anime.type}
+              </p>
+              <p>
+                <b>Status:</b> {anime.status}
+              </p>
+              <p>
+                <b>Episodes:</b> {anime.episodes}
+              </p>
+              <p>
+                <b>Score:</b> {anime.score ?? "N/A"}
+              </p>
+              <p>
+                <b>Year:</b> {anime.year ?? "?"}
+              </p>
+              <p>
+                <b>Genres:</b>{" "}
+                {anime.genres.map((g) => g.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Studios:</b>{" "}
+                {anime.studios.map((s) => s.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Producers:</b>{" "}
+                {anime.producers.map((p) => p.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Licensors:</b>{" "}
+                {anime.licensors.map((l) => l.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Aired:</b> {anime.aired?.string || "-"}
+              </p>
+              <p>
+                <b>Duration:</b> {anime.duration || "-"}
+              </p>
+              <p>
+                <b>Rating:</b> {anime.rating || "-"}
+              </p>
+              <p>
+                <b>Rank:</b> #{anime.rank || "-"}
+              </p>
+              <p>
+                <b>Popularity:</b> #{anime.popularity || "-"}
+              </p>
+              <p>
+                <b>Favorites:</b> {anime.favorites || 0}
+              </p>
+              <p>
+                <b>Synonyms:</b> {anime.title_synonyms.join(", ") || "-"}
+              </p>
+              <p>
+                <b>Approved:</b> {anime.approved ? "Yes" : "No"}
+              </p>
+              <p>
+                <b>Source:</b> {anime.source || "-"}
+              </p>
+              <p>
+                <b>Members:</b> {anime.members?.toLocaleString() || 0}
+              </p>
+              <p>
+                <b>Season:</b> {anime.season ?? "-"}
+              </p>
+              <p>
+                <b>Broadcast:</b>{" "}
+                {anime.broadcast?.string ||
+                  `${anime.broadcast?.day ?? "?"} ${
+                    anime.broadcast?.time ?? "?"
+                  }`}
+              </p>
+              <p>
+                <b>Demographics:</b>{" "}
+                {anime.demographics.map((d) => d.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Themes:</b>{" "}
+                {anime.themes.map((t) => t.name).join(", ") || "-"}
+              </p>
+              <p>
+                <b>Explicit Genres:</b>{" "}
+                {anime.explicit_genres.map((g) => g.name).join(", ") || "-"}
+              </p>
             </div>
 
             <div className="space-y-2">
               <h2 className="text-xl font-semibold">Synopsis</h2>
-              <p className="text-justify text-gray-700 text-sm">{anime.synopsis}</p>
+              <p className="text-justify text-gray-700 text-sm">
+                {anime.synopsis}
+              </p>
             </div>
+            {anime.background && (
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">Background</h2>
+                <p className="text-justify text-gray-700 text-sm">
+                  {anime.background}
+                </p>
+              </div>
+            )}
 
             {anime.trailer?.embed_url && (
               <div className="space-y-2">
@@ -96,10 +185,30 @@ export default function DetailAnime() {
                 ></iframe>
               </div>
             )}
+            {anime.theme?.openings?.length > 0 && (
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">Opening Theme</h2>
+                <ul className="list-disc pl-5 text-sm">
+                  {anime.theme.openings.map((op, i) => (
+                    <li key={i}>{op}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {anime.theme?.endings?.length > 0 && (
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">Ending Theme</h2>
+                <ul className="list-disc pl-5 text-sm">
+                  {anime.theme.endings.map((ed, i) => (
+                    <li key={i}>{ed}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Characters</CardTitle>
@@ -145,6 +254,83 @@ export default function DetailAnime() {
           )}
         </CardContent>
       </Card>
+
+      {anime.relations?.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Relations</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-1 text-sm">
+              {anime.relations.map((rel, i) => (
+                <li key={i}>
+                  <b>{rel.relation}:</b>{" "}
+                  {rel.entry.map((item, j) => (
+                    <span key={j}>
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        {item.name}
+                      </a>
+                      {j < rel.entry.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+
+      {anime.streaming?.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Where to Watch</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-1 text-sm">
+              {anime.streaming.map((site, i) => (
+                <li key={i}>
+                  <a
+                    href={site.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {site.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+      {anime.external?.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">External Links</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5 space-y-1 text-sm">
+              {anime.external.map((ext, i) => (
+                <li key={i}>
+                  <a
+                    href={ext.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {ext.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
