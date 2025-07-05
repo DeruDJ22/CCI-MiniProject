@@ -73,6 +73,5 @@ Clone repository dan jalankan proyek secara lokal:
 
 ```bash
 git clone https://github.com/DeruDJ22/CCI-MiniProject.git
-cd project-nextjs
 npm install
 npm run dev
